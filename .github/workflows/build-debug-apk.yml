@@ -1,0 +1,41 @@
+name: Build debug GNSSLogger apk
+
+on:
+  [workflow_dispatch]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    - name: Grant execute permission for gradlew
+      working-directory: ./GNSSLogger
+      run: chmod +x gradlew
+
+    - name: Set env
+      working-directory: ./GNSSLogger
+      run: echo "COMMIT_SHA=$(git log -n 1 --format='%h')" >> $GITHUB_ENV
+
+    - name: Build with Gradle
+      working-directory: ./GNSSLogger
+      run: ./gradlew assembleDebug
+
+    - name: Rename APK
+      working-directory: ./GNSSLogger
+      run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/GNSSLogger-debug-$COMMIT_SHA.apk
+
+    - name: Archive APK
+      working-directory: ./GNSSLogger
+      uses: actions/upload-artifact@v4
+      with:
+        name: GNSSLogger-debug-apk-${{ env.COMMIT_SHA }}
+        path: app/build/outputs/apk/debug/*.apk
+        retention-days: 30
