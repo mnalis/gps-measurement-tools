@@ -33,9 +33,8 @@ jobs:
       run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/GNSSLogger-debug-$COMMIT_SHA.apk
 
     - name: Archive APK
-      working-directory: ./GNSSLogger
       uses: actions/upload-artifact@v4
       with:
         name: GNSSLogger-debug-apk-${{ env.COMMIT_SHA }}
-        path: app/build/outputs/apk/debug/*.apk
+        path: GNSSLogger/app/build/outputs/apk/debug/*.apk
         retention-days: 30
