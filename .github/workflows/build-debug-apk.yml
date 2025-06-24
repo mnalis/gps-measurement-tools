@@ -18,9 +18,9 @@ jobs:
         
     - name: Use Gradle 8.4 to build
       uses: gradle/gradle-build-action@v3
-      working-directory: ./GNSSLogger
       with:
         gradle-version: 8.4
+        working-directory: ./GNSSLogger
         
     - name: Grant execute permission for gradlew
       working-directory: ./GNSSLogger
