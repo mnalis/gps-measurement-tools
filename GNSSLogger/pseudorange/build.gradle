@@ -3,11 +3,13 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    namespace "com.google.android.apps.location.gps.gnsslogger.pseudorange"  // Add this line
+    
+    compileSdk 33
 
     defaultConfig {
         minSdk 24
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
