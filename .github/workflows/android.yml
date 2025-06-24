@@ -1,8 +1,6 @@
 name: Android CI Build
 
 on:
-  [workflow_dispatch]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
